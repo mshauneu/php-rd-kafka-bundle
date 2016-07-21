@@ -42,7 +42,7 @@ mshauneu_rd_kafka:
         auto_commit_interval_ms: 100
 ```
 Configuration properties are documented:
-- for producer or  consumer in [TopicConfiguration.php](https://github.com/mshauneu/php-rd-kafka-bundle/blob/master/src/Mshauneu/RdKafkaBundle/DependencyInjection/TopicCommunicator.php)
+- for producer or  consumer in [CommunicatorConfiguration.php](https://github.com/mshauneu/php-rd-kafka-bundle/blob/master/src/Mshauneu/RdKafkaBundle/DependencyInjection/CommunicatorConfiguration.php)
 - for topic to produce in [TopicProducerConfiguration.php](https://github.com/mshauneu/php-rd-kafka-bundle/blob/master/src/Mshauneu/RdKafkaBundle/DependencyInjection/TopicProducerConfiguration.php)
 - for topic to consume in [TopicConsumerConfiguration.php](https://github.com/mshauneu/php-rd-kafka-bundle/blob/master/src/Mshauneu/RdKafkaBundle/DependencyInjection/TopicConsumerConfiguration.php)
 
