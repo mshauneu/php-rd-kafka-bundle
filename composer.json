@@ -1,0 +1,33 @@
+{
+	"name" : "mshauneu/php-rdkafka-bundle",
+	"type" : "library",
+	"description" : "Integrates php-rdkafka with Symfony2|3",
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "Mikhail Shauneu"
+		}
+	],
+	"keywords" : [
+		"php",
+		"symfony",
+		"kafka"
+	],
+	"autoload" : {
+		"psr-4" : {
+			"" : "src/"
+		}
+   	},
+	"require" : {
+		"php" : ">=5.6",
+		"symfony/framework-bundle" : "~2.3 || ~3.0",
+		"symfony/dependency-injection" : "~2.3 || ~3.0",
+		"symfony/console" : "~2.3 || ~3.0",
+		"symfony/config" : "~2.3 || ~3.0",
+		"symfony/yaml" : "~2.3 || ~3.0",
+		"kwn/php-rdkafka-stubs" : "^0.0.4",
+		"ext-rdkafka" : "*"
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : "~4.8 || ~5.0"
+	}
+}

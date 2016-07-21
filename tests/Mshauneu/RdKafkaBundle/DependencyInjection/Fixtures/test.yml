@@ -1,0 +1,17 @@
+mshauneu_rd_kafka:
+  producers: 
+    test_producer: 
+      brokers: 127.0.0.1:9092
+      topic: test_topic   
+  consumers:
+    test_consumer:
+      brokers: 127.0.0.1:9092
+      topic: test_topic   
+      properties: 
+        group_id: "test_group_id"
+      topic_properties: 
+        offset_store_method: broker           
+        auto_offset_reset: smallest
+        auto_commit_interval_ms: 100
+
+

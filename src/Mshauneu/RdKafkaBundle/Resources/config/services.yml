@@ -1,0 +1,4 @@
+services:
+  mshauneu_rd_kafka:
+    class: Mshauneu\RdKafkaBundle\Topic\Manager
+    lazy: true
