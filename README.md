@@ -26,21 +26,20 @@ public function registerBundles() {
 Simple configuration could look like:
 ```yaml
 mshauneu_rd_kafka:
-  topics: 
-    test_topic: 
+  producers: 
+    test_producer: 
       brokers: 127.0.0.1:9092
+      topic: test_topic   
+  consumers:
+    test_consumer:
+      brokers: 127.0.0.1:9092
+      topic: test_topic   
       properties: 
-        group_id: "test_group_id" 
-      producers: 
-        test_producer:
-          properties:
-            request_required_acks: 0 
-      consumers:
-        test_consumer:  
-          properties: 
-            offset_store_method: broker           
-            auto_offset_reset: smallest
-            auto_commit_interval_ms: 100
+        group_id: "test_group_id"
+      topic_properties: 
+        offset_store_method: broker           
+        auto_offset_reset: smallest
+        auto_commit_interval_ms: 100
 ```
 Configuration properties are documented:
 - for producer or  consumer in [TopicConfiguration.php](https://github.com/mshauneu/php-rd-kafka-bundle/blob/master/src/Mshauneu/RdKafkaBundle/DependencyInjection/TopicCommunicator.php)
