@@ -87,3 +87,7 @@ By CLI:
 ./app/console kafka:consumer --consumer test_consumer --handler test_message_handler 
 ```
 
+## License
+
+This project is under the MIT License. See the [LICENSE](https://github.com/mshauneu/php-rd-kafka-bundle/blob/master/LICENSE) file for the full license text.
+
