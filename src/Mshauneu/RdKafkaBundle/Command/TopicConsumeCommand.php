@@ -32,7 +32,7 @@ class TopicConsumeCommand extends ContainerAwareCommand
 			->addOption('offset', 'o', InputOption::VALUE_OPTIONAL, 'Offset', TopicCommunicator::OFFSET_BEGINNING)
 			->addOption('timeout', 't', InputOption::VALUE_OPTIONAL, 'Timeout in ms', 1000);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * @see \Symfony\Component\Console\Command\Command::execute()
@@ -68,8 +68,16 @@ class TopicConsumeCommand extends ContainerAwareCommand
         }
 
 		$topicConsumer->consumeStart($offset, $partition);
-		$topicConsumer->consume($messageHandler, $partition, $timeout);
-		$topicConsumer->consumeStop();
+
+        pcntl_signal(SIGTERM, [&$topicConsumer, 'stop']);
+        pcntl_signal(SIGINT, [&$topicConsumer, 'stop']);
+        pcntl_signal(SIGHUP, [&$topicConsumer, 'restart']);
+
+        while($topicConsumer->isConsuming()) {
+            $topicConsumer->consume($messageHandler, $partition, $timeout);
+            pcntl_signal_dispatch();
+        }
+
 	}
 
 }
