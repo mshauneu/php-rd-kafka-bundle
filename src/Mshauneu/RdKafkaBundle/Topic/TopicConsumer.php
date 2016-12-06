@@ -56,12 +56,19 @@ class TopicConsumer extends TopicCommunicator {
 		if (true !== $this->isConsuming) {
 			throw new \Exception ("Please call consumeStart first to start consuming message");
 		}
-		
-		while ($message = $this->consumerTopic->consume($partition, $timeoutInMs)) {
-			$consumer->consume($message->topic_name, $message->partition, $message->offset, $message->key, $message->payload);
-		}
+
+        if($message = $this->consumerTopic->consume($partition, $timeoutInMs)) {
+            return $consumer->consume($message->topic_name, $message->partition, $message->offset, $message->key, $message->payload);
+        }
+
+        return true;
 	}
-	
+
+	public function stop()
+    {
+        $this->consumeStop();
+    }
+
 	/**
 	 * @param number $partition
 	 */
@@ -69,6 +76,19 @@ class TopicConsumer extends TopicCommunicator {
 		$this->consumerTopic->consumeStop($partition);
 		$this->consumerTopic = null;
 		$this->isConsuming = false;
-	}	
+	}
+
+	public function restart()
+    {
+        // Implement a restart method
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isConsuming()
+    {
+        return $this->isConsuming;
+    }
 	
 }
