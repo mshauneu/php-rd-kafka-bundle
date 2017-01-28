@@ -29,7 +29,7 @@ class TopicConsumeCommand extends ContainerAwareCommand
 			->addOption('consumer', null, InputOption::VALUE_REQUIRED, 'Consumer')
 			->addOption('handler', null, InputOption::VALUE_REQUIRED, 'MessageHandler')
 			->addOption('partition', 'p', InputOption::VALUE_OPTIONAL, 'Partition', 0)
-			->addOption('offset', 'o', InputOption::VALUE_OPTIONAL, 'Offset', TopicCommunicator::OFFSET_BEGINNING)
+			->addOption('offset', 'o', InputOption::VALUE_OPTIONAL, 'Offset', 'beginning')
 			->addOption('timeout', 't', InputOption::VALUE_OPTIONAL, 'Timeout in ms', 1000);
 	}
 
@@ -57,9 +57,17 @@ class TopicConsumeCommand extends ContainerAwareCommand
             throw new \Exception("Partition needs to be a number in the range 0..2^32-1");
         }
 
-		$offset = $input->getOption('offset');
-        if(!is_numeric($offset)) {
-            throw new \Exception("Offset needs to be a number");
+        $offsetName = $input->getOption('offset');
+        switch (strtolower($offsetName)) {
+            case 'latest':
+            case 'last':
+                $offset = TopicConsumer::OFFSET_END;
+                break;
+            case 'beginning':
+            case 'first':
+            default:
+                $offset = TopicConsumer::OFFSET_BEGINNING;
+                break;
         }
 
 		$timeout = $input->getOption('timeout');
