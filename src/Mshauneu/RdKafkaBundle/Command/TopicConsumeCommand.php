@@ -59,6 +59,9 @@ class TopicConsumeCommand extends ContainerAwareCommand
 
         $offsetName = $input->getOption('offset');
         switch (strtolower($offsetName)) {
+            case 'stored':
+                $offset = TopicConsumer::OFFSET_STORED;
+                break;
             case 'latest':
             case 'last':
                 $offset = TopicConsumer::OFFSET_END;
